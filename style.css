@@ -1,0 +1,188 @@
+/* Global reset & box sizing */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Base page styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
+/* Centered container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Header */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-family: Verdana, sans-serif;
+  font-weight: bold;
+  color: #212121;
+}
+
+/* Logo */
+.logo {
+  width: 140px;
+  margin-right: 15px;
+}
+
+/* Date‐picker & button row */
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+  padding: 0 20px;
+}
+
+/* Inputs and buttons */
+input[type="date"],
+button {
+  font-family: Arial, sans-serif;
+  font-weight: normal;
+  color: #666;
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  line-height: 1.4;
+  width: 100%;
+}
+
+/* Button specific */
+button {
+  background-color: #d3d3d3;
+  color: black;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #bfbfbf;
+}
+
+/* Stack horizontally on wider screens */
+@media (min-width: 600px) {
+  .filters {
+    flex-direction: row;
+    padding: 0;
+  }
+  
+  input[type="date"],
+  button {
+    width: auto;
+  }
+}
+
+/* Gallery flex container */
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  justify-content: center;
+}
+
+/* Gallery items */
+.gallery-item {
+  flex: 1 1 100%;  /* full width by default */
+  min-width: 280px;
+  max-width: 500px;
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Three columns on wider screens */
+@media (min-width: 1000px) {
+  .gallery-item {
+    flex: 0 1 31%;
+  }
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.gallery-item p {
+  margin-top: 10px;
+  padding: 5px;
+  font-size: 14px;
+}
+
+/* Placeholder content */
+.placeholder {
+  flex: 1 1 100%;
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+
+.placeholder-icon {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+/* ====== APOD add-ons (keeps your current look) ====== */
+
+/* UI strip above gallery */
+.apod-ui { display: grid; gap: 10px; }
+.apod-ui .dates { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.apod-ui label { font-size: 14px; color: #333; }
+.apod-ui input[type="date"] { padding: 8px 10px; }
+.fact { padding: 8px 10px; border: 1px solid #e2e8f0; border-radius: 8px; background: #fff; color: #111; }
+.fact strong { color: #0b3d91; }
+.status { min-height: 20px; color: #333; }
+
+/* Use your existing .gallery-item card, add a media wrapper and hover zoom */
+.gi-media { position: relative; overflow: hidden; border-radius: 4px; }
+.gi-thumb { width: 100%; height: 200px; object-fit: cover; transition: transform .25s ease; }
+.gallery-item:hover .gi-thumb { transform: scale(1.06); } /* Hover Zoom (LevelUp) */
+.play-badge {
+  position: absolute; left: 10px; bottom: 10px;
+  background: #FC3D21; color: #fff; padding: 4px 8px;
+  font-weight: 700; font-size: 12px; border-radius: 6px;
+  box-shadow: 0 3px 10px rgba(252,61,33,.35);
+}
+.gi-video-fallback {
+  display: grid; place-items: center; height: 200px; background: #0b1130; color: #fff;
+}
+
+/* Modal */
+.modal { position: fixed; inset: 0; display: none; z-index: 9999; }
+.modal[aria-hidden="false"] { display: block; }
+.modal__backdrop { position: absolute; inset: 0; background: rgba(0,0,0,.55); backdrop-filter: blur(2px); }
+.modal__content {
+  position: relative; z-index: 1; max-width: min(1100px, 92vw); margin: 6vh auto;
+  background: #0f1426; color: #eaf0ff; border: 1px solid #243b6b; border-radius: 18px; overflow: hidden;
+  display: grid; grid-template-columns: 1.2fr 1fr;
+}
+@media (max-width: 900px) { .modal__content { grid-template-columns: 1fr; } }
+.modal__media { max-height: 75vh; overflow: hidden; background: #0b1130; }
+.modal__media img, .modal__media iframe { width: 100%; height: 100%; object-fit: contain; display: block; }
+.modal__meta { padding: 16px 18px; }
+.modal__meta .muted { color: #b9c3d6; }
+.modal__close {
+  position: absolute; top: 10px; right: 10px; width: 40px; height: 40px; border-radius: 50%;
+  border: 1px solid #243b6b; background: #0b1130; color: #eaf0ff; font-size: 24px; cursor: pointer;
+}
